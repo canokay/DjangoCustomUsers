@@ -1,5 +1,5 @@
 from django import forms
-from CustomUsers.models import UserStatus
+# from djangocustomusersAbtract_app.models import UserStatus
 
 
 class RegisterForm(forms.Form):
@@ -34,9 +34,3 @@ class LoginForm(forms.Form):
     def clean(self):
         username = self.cleaned_data.get("username")
         password = self.cleaned_data.get("password")
-
-
-class UserStatusForm(forms.ModelForm):
-    class Meta:
-        model = UserStatus
-        fields = ["userStatus"]

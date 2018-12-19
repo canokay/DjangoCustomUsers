@@ -2,9 +2,17 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from DjangoCustomUsers.decorators import admin_only, role_required
+from djangocustomusersAbtract.decorators import admin_only, role_required
+from djangocustomusersAbtract.forms import LoginForm
 
-from CustomUsers.forms import LoginForm, UserStatusForm
+"""
+def IndexView(request):
+    if request.user.status == "admin":
+        return render(request, 'index.html')
+    else:
+        return render(request, 'error.html')
+
+"""
 
 
 def IndexView(request):
@@ -57,12 +65,12 @@ def JustAdminView(request):
 
 
 @login_required(login_url="login")
-@role_required(allowed_roles=[2])
+@role_required(allowed_roles=["editor"])
 def JustEditorView(request):
     return render(request, 'justEditor.html')
 
 
 @login_required(login_url="login")
-@role_required(allowed_roles=[1, 2])
+@role_required(allowed_roles=["admin", "editor"])
 def AdminOrEditorView(request):
     return render(request, 'adminOrEditor.html')

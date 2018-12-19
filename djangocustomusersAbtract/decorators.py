@@ -8,7 +8,7 @@ from django.shortcuts import redirect
 def role_required(allowed_roles=[]):
     def decorator(view_func):
         def wrap(request, *args, **kwargs):
-            if request.user.profile.userStatus_id in allowed_roles:
+            if request.user.status in allowed_roles:
                 return view_func(request, *args, **kwargs)
             else:
                 return render(request, "permissionsError.html")
@@ -18,7 +18,7 @@ def role_required(allowed_roles=[]):
 
 def admin_only(view_func):
     def wrap(request, *args, **kwargs):
-        if request.user.profile.userStatus == 1:
+        if request.user.status == "admin":
             return view_func(request, *args, **kwargs)
         else:
             return render(request, "permissionsError.html")
