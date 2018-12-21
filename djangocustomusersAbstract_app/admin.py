@@ -1,7 +1,7 @@
 from django.contrib import admin
-from djangocustomusersAbstract_app.models import User
+from djangocustomusersAbstract_app.models import CustomUser
 
-admin.site.register(User)
+admin.site.register(CustomUser)
 
 
 class UserAdmin(admin.ModelAdmin):

@@ -108,4 +108,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-AUTH_USER_MODEL = 'djangocustomusersAbstract_app.User'
+AUTH_USER_MODEL = 'djangocustomusersAbstract_app.CustomUser'

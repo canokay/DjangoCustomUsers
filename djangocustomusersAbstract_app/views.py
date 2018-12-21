@@ -1,18 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.forms import UserCreationForm
+#from django.contrib.auth.forms import RegisterForm
 from django.contrib.auth.decorators import login_required
 from djangocustomusersAbtract.decorators import admin_only, role_required
-from djangocustomusersAbtract.forms import LoginForm
-
-"""
-def IndexView(request):
-    if request.user.status == "admin":
-        return render(request, 'index.html')
-    else:
-        return render(request, 'error.html')
-
-"""
+from djangocustomusersAbtract.forms import LoginForm, RegisterForm
 
 
 def IndexView(request):
@@ -20,18 +11,29 @@ def IndexView(request):
 
 
 def RegisterView(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+    """if request.method == "POST":
+        form = RegisterForm(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
+            status = form.cleaned_data.get("status")
+
+            newUser = User(username=username)
+            newUser.set_password(password)
+            newUser.set_status(status)
+
+            newUser.save()
             login(request, user)
-            return redirect('home')
     else:
-        form = UserCreationForm()
-    return render(request, 'register.html', {'form': form})
+        form = RegisterForm()
+        context = {
+            "form": form
+        }"""
+    form = RegisterForm()
+    context = {
+        "form": form
+    }
+    return render(request, "register-2.html", context)
 
 
 def LoginView(request):
